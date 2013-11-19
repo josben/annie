@@ -12,6 +12,14 @@ $ virtualenv django6
 
 $ source django6/bin/activate
 
+ahora descargamos el proyecto
+
+$ git clone https://github.com/josben/annie
+
+Instalamos las librerias necesarias
+
+$ cd annie
+
 $ pip install -r requirements/common.txt
 
 2. Ahora instalamos django-userena
