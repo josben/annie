@@ -14,13 +14,13 @@ $ source django6/bin/activate
 
 ahora descargamos el proyecto
 
-$ git clone https://github.com/josben/annie
+(django6)$ git clone https://github.com/josben/annie
 
 Instalamos las librerias necesarias
 
-$ cd annie
+(django6)$ cd annie
 
-$ pip install -r requirements/common.txt
+(django6)$ pip install -r requirements/common.txt
 
 2. Ahora instalamos django-userena
 ==================================
@@ -29,7 +29,12 @@ Tienes dos opciones:
 - puedes descargar el fork que saque a django-userena, este ya esta con los
 cambios para que funcione sin problemas con Django 1.6
 
-$ git clone https://github.com/josben/django-userena
+Primero nos vamos un directorio arriba del proyecto, y lo descargamos ahi o en el lugar
+que prefieras.
+
+(django6)$ git clone https://github.com/josben/django-userena
+(django6)$ cd django-userena
+(django6)$ python setup.py install
 
 - la segunda opcion es que te descargues del autor original y le parches
 
