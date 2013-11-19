@@ -9,7 +9,9 @@ para empezar a trabajarlo sigue los siguientes pasos:
 =============================
 
 $ virtualenv django6
+
 $ source django6/bin/activate
+
 $ pip install -r requirements/common.txt
 
 2. Ahora instalamos django-userena
@@ -31,8 +33,11 @@ django-userena para que realize los cambios necesarios para Django 1.6
 $ cp patches/fix_to_django6.patch /path/django-userena
 
 $ cd django-userena
+
 $ git apply --stat fix_to_django6.patch
+
 $ git apply --check fix_to_django6.patch
+
 $ git am --signoff < fix_to_django6.patch
 
 y listo, ya lo tienes parchado
