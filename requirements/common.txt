@@ -1,3 +1,2 @@
-https://github.com/dyve/django-bootstrap-toolkit
-https://github.com/josben/django-userena
-https://github.com/lukaszb/django-guardian
+Django==1.6
+django-bootstrap-toolkit
