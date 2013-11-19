@@ -1,0 +1,77 @@
+From 5ba1c4a81b1877322b72927b4bbaa78eebdeab3e Mon Sep 17 00:00:00 2001
+From: josben <josebenjaminp@gmail.com>
+Date: Tue, 19 Nov 2013 18:10:04 -0400
+Subject: [PATCH] Fix to django1.6
+
+---
+ demo/demo/urls.py                         |    2 +-
+ userena/contrib/umessages/models.py       |    4 ++--
+ userena/contrib/umessages/tests/models.py |    4 ++--
+ userena/contrib/umessages/urls.py         |    2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/demo/demo/urls.py b/demo/demo/urls.py
+index c95ee9b..e0d78a8 100644
+--- a/demo/demo/urls.py
++++ b/demo/demo/urls.py
+@@ -1,4 +1,4 @@
+-from django.conf.urls.defaults import *
++from django.conf.urls import *
+ from django.conf import settings
+ 
+ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+diff --git a/userena/contrib/umessages/models.py b/userena/contrib/umessages/models.py
+index 5d85491..2f5b9a3 100644
+--- a/userena/contrib/umessages/models.py
++++ b/userena/contrib/umessages/models.py
+@@ -1,6 +1,6 @@
+ from django.db import models
+ from django.utils.translation import ugettext_lazy as _
+-from django.utils.text import truncate_words
++from django.utils.text import Truncator
+ 
+ from userena.contrib.umessages.managers import (MessageManager, MessageContactManager,
+                                                 MessageRecipientManager)
+@@ -114,7 +114,7 @@ class Message(models.Model):
+ 
+     def __unicode__(self):
+         """ Human representation, displaying first ten words of the body. """
+-        truncated_body = truncate_words(self.body, 10)
++        truncated_body = Truncator.words(self.body, 10)
+         return "%(truncated_body)s" % {'truncated_body': truncated_body}
+ 
+     def save_recipients(self, um_to_user_list):
+diff --git a/userena/contrib/umessages/tests/models.py b/userena/contrib/umessages/tests/models.py
+index 4290dd3..7633f8b 100644
+--- a/userena/contrib/umessages/tests/models.py
++++ b/userena/contrib/umessages/tests/models.py
+@@ -1,6 +1,6 @@
+ from django.test import TestCase
+ from django.core.urlresolvers import reverse
+-from django.utils.text import truncate_words
++from django.utils.text import Truncator
+ 
+ from userena.contrib.umessages.models import Message, MessageRecipient, MessageContact
+ from userena.utils import get_user_model
+@@ -36,7 +36,7 @@ class MessageModelTests(TestCase):
+     def test_string_formatting(self):
+         """ Test the human representation of a message """
+         message = Message.objects.get(pk=1)
+-        truncated_body = truncate_words(message.body, 10)
++        truncated_body = Truncator.words(message.body, 10)
+         self.failUnlessEqual(message.__unicode__(),
+                              truncated_body)
+ 
+diff --git a/userena/contrib/umessages/urls.py b/userena/contrib/umessages/urls.py
+index 73440c1..9cb813d 100644
+--- a/userena/contrib/umessages/urls.py
++++ b/userena/contrib/umessages/urls.py
+@@ -1,4 +1,4 @@
+-from django.conf.urls.defaults import *
++from django.conf.urls import *
+ from userena.contrib.umessages import views as messages_views
+ from django.contrib.auth.decorators import login_required
+ 
+-- 
+1.7.10.4
+
